@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import type { FormEvent } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import Alert from "../components/Alert"
+import AuthLayout from "../components/AuthLayout"
 import { clearAuthError, login } from "../store/authSlice"
 import { useAppDispatch, useAppSelector } from "../store/hooks"
 import { homeFor } from "../utils/roleHome"
@@ -31,8 +32,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="mx-auto max-w-md">
-      <div className="card">
+    <AuthLayout>
+      <div>
         <h1 className="mb-1 text-2xl font-bold">Welcome back</h1>
         <p className="mb-6 text-sm text-slate-500">Login to apply for jobs or manage your postings.</p>
         <Alert message={error} />
@@ -76,6 +77,6 @@ export default function LoginPage() {
           </Link>
         </p>
       </div>
-    </div>
+    </AuthLayout>
   )
 }

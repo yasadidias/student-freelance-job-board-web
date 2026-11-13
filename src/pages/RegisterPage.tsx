@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import type { FormEvent } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Alert from "../components/Alert"
+import AuthLayout from "../components/AuthLayout"
 import { clearAuthError, register } from "../store/authSlice"
 import { useAppDispatch, useAppSelector } from "../store/hooks"
 import { homeFor } from "../utils/roleHome"
@@ -36,8 +37,8 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="mx-auto max-w-md">
-      <div className="card">
+    <AuthLayout>
+      <div>
         <h1 className="mb-1 text-2xl font-bold">Create your account</h1>
         <p className="mb-6 text-sm text-slate-500">It takes less than a minute.</p>
         <Alert message={formError ?? error} />
@@ -123,6 +124,6 @@ export default function RegisterPage() {
           </Link>
         </p>
       </div>
-    </div>
+    </AuthLayout>
   )
 }

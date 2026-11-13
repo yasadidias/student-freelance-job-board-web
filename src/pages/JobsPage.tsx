@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Alert from "../components/Alert"
+import CategoryIcon from "../components/CategoryIcon"
 import HeroTimetable from "../components/HeroTimetable"
+import HowItWorks from "../components/HowItWorks"
+import { EmptyIllustration } from "../components/Illustrations"
 import JobCard from "../components/JobCard"
 import Pagination from "../components/Pagination"
 import Spinner from "../components/Spinner"
@@ -101,12 +104,13 @@ export default function JobsPage() {
                 setCategory(c)
                 setPage(1)
               }}
-              className={`rounded-md border px-3.5 py-1.5 text-sm font-medium transition-colors ${
+              className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
                 active
                   ? "border-ink bg-ink text-white"
                   : "border-slate-300 bg-white text-slate-700 hover:border-ink"
               }`}
             >
+              {c && <CategoryIcon category={c} variant="bare" size={16} />}
               {c || "All jobs"}
             </button>
           )
@@ -127,8 +131,9 @@ export default function JobsPage() {
       {loading ? (
         <Spinner label="Loading jobs..." />
       ) : items.length === 0 ? (
-        <div className="card py-12 text-center">
-          <p className="font-semibold">No jobs match that search.</p>
+        <div className="card py-10 text-center">
+          <EmptyIllustration />
+          <p className="mt-2 font-semibold">No jobs match that search.</p>
           <p className="mt-1 text-sm text-slate-500">Try a different word, or show every category.</p>
           <button className="btn-secondary mt-4" onClick={clearFilters}>
             Clear filters
@@ -144,6 +149,8 @@ export default function JobsPage() {
           <Pagination pagination={pagination} onPageChange={setPage} />
         </>
       )}
+
+      <HowItWorks showSignup={!user} />
     </div>
   )
 }
